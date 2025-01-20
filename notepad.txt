@@ -1,0 +1,4 @@
+CORS - É um mecanismo de segurança utilizado pelos navegadores
+para controlar como os recursos de um site 
+
+CORS HEADERS
