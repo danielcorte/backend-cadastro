@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'rest_framework', # importante para o app saber que os dois existem
     'api', # novo
     'rest_framework_simplejwt',
+    'corsheaders'
 ]
 
 REST_FRAMEWORK = {
@@ -31,6 +32,10 @@ REST_FRAMEWORK = {
     
 }
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+]
+
 SIMPLE_JWT = {
     "AUTH_HEADER_TYPES": ("Bearer",),
     
@@ -40,6 +45,7 @@ SIMPLE_JWT = {
 }
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
