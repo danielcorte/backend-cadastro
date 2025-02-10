@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import listar_professores, ProfessoresView, ProfessoresDetailView
+from .views import listar_professores, CadastroFilter, ProfessoresView, ProfessoresDetailView
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -14,4 +14,6 @@ urlpatterns = [
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('token/verify/', TokenVerifyView.as_view(), name='token_verify'),
+
+    path('search/', CadastroFilter, name='product-list'),
 ]

@@ -1,0 +1,29 @@
+<form method="get" action="{% url 'search_teachers' %}">
+    <input type="text" name="search" placeholder="Procure por um professor" value="{{ query }}">
+    <button type="submit">Search</button>
+</form>
+
+<ul>
+    {% for teacher in teachers %}
+        <li>{{ teacher.nome }}</li>
+    {% empty %}
+        <li>No teachers found.</li>
+    {% endfor %}
+</ul>
+
+<style>
+    form {
+        margin: 20px;
+    }
+    input[type="text"] {
+        padding: 8px;
+        width: 200px;
+        margin-right: 10px;
+    }
+    button {
+        padding: 8px 12px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+    }
+</style>

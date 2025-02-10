@@ -20,7 +20,8 @@ INSTALLED_APPS = [
     'rest_framework', # importante para o app saber que os dois existem
     'api', # novo
     'rest_framework_simplejwt',
-    'corsheaders'
+    'corsheaders',
+
 ]
 
 REST_FRAMEWORK = {
@@ -32,9 +33,7 @@ REST_FRAMEWORK = {
     
 }
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-]
+CORS_ALLOW_ALL_ORIGINS = True
 
 SIMPLE_JWT = {
     "AUTH_HEADER_TYPES": ("Bearer",),
