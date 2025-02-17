@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'api', # novo
     'rest_framework_simplejwt',
     'corsheaders',
+    'django_filters',
 
 ]
 

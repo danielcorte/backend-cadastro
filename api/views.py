@@ -3,9 +3,12 @@ from .models import Cadastro
 from .serializer import CadastroSerializer
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, ListAPIView
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
+
+from rest_framework.filters import SearchFilter
+from django_filters.rest_framework import DjangoFilterBackend
 import django_filters
 
 @api_view(['GET', 'POST'])
@@ -34,6 +37,13 @@ class ProfessoresDetailView(RetrieveUpdateDestroyAPIView):
     queryset = Cadastro.objects.all()
     serializer_class = CadastroSerializer
 
+
+class ProfessoresSearchView(ListAPIView):
+    queryset = Cadastro.objects.all()
+    serializer_class = CadastroSerializer
+    permission_classes = [IsAuthenticated]
+    filter_backends = [DjangoFilterBackend, SearchFilter]
+    search_fields = ['nome']
 
 class CadastroFilter(django_filters.FilterSet):
     ni = django_filters.CharFilter(lookup_expr='icontains')
