@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .models import Cadastro
-from .serializer import CadastroSerializer
+from ..models import Professores
+from ..serializer import ProfessoresSerializer
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, ListAPIView
@@ -14,12 +14,12 @@ import django_filters
 @api_view(['GET', 'POST'])
 def listar_professores(request):
     if request.method == 'GET':
-        queryset = Cadastro.objects.all()
-        serializer = CadastroSerializer(queryset, many=True)
+        queryset = Professores.objects.all()
+        serializer = ProfessoresSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
     elif request.method == 'POST':
-        serializer = CadastroSerializer(data=request.data)
+        serializer = ProfessoresSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -29,18 +29,18 @@ def listar_professores(request):
     
 
 class ProfessoresView(ListCreateAPIView):
-    queryset = Cadastro.objects.all()
-    serializer_class = CadastroSerializer
+    queryset = Professores.objects.all()
+    serializer_class = ProfessoresSerializer
     permission_classes = [IsAuthenticated]
 
 class ProfessoresDetailView(RetrieveUpdateDestroyAPIView):
-    queryset = Cadastro.objects.all()
-    serializer_class = CadastroSerializer
+    queryset = Professores.objects.all()
+    serializer_class = ProfessoresSerializer
 
 
 class ProfessoresSearchView(ListAPIView):
-    queryset = Cadastro.objects.all()
-    serializer_class = CadastroSerializer
+    queryset = Professores.objects.all()
+    serializer_class = ProfessoresSerializer
     permission_classes = [IsAuthenticated]
     filter_backends = [DjangoFilterBackend, SearchFilter]
     search_fields = ['nome']
@@ -55,11 +55,11 @@ class CadastroFilter(django_filters.FilterSet):
     ocup__lt = django_filters.NumberFilter(field_name='ocup', lookup_expr='lt')
 
     class Meta:
-        model = Cadastro
+        model = Professores
         fields = ['ni', 'nome', 'email', 'cel', 'ocup']
 
 def product_list(request):
-    f = CadastroFilter(request.GET, queryset=Cadastro.objects.all)
+    f = CadastroFilter(request.GET, queryset=Professores.objects.all)
     return render(request, 'teachers_list.html', {'filter': f})
 
 # def procurar_professores(request):
