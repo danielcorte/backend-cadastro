@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import views_prof, views_disc
+from .views import views_prof, views_disc, views_ambi, views_curs
 
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -23,4 +23,13 @@ urlpatterns = [
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('token/verify/', TokenVerifyView.as_view(), name='token_verify'),
 
+    path('ambientes', views_ambi.listar_ambientes),
+    path('ambi', views_ambi.AmbientesView.as_view()),
+    path('ambi/id/<int:pk>', views_ambi.AmbientesDetailView.as_view()),
+    path('ambi/search/', views_ambi.AmbientesSearchView.as_view()),
+
+    path('cursos', views_curs.listar_cursos),
+    path('cursos', views_curs.CursosView.as_view()),
+    path('cursos/id/<int:pk>', views_curs.CursosDetailView.as_view()),
+    path('cursos/search/', views_curs.CursosSearchView.as_view()),
 ]
