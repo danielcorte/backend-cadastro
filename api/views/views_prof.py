@@ -43,7 +43,7 @@ class ProfessoresSearchView(ListAPIView):
     serializer_class = ProfessoresSerializer
     permission_classes = [IsAuthenticated]
     filter_backends = [DjangoFilterBackend, SearchFilter]
-    search_fields = ['nome']
+    search_fields = ['id', 'ni', 'nome', 'email', 'cel', 'ocup']
 
 class CadastroFilter(django_filters.FilterSet):
     ni = django_filters.CharFilter(lookup_expr='icontains')

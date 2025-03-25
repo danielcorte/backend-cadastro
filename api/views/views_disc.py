@@ -43,9 +43,13 @@ class DisciplinasSearchView(ListAPIView):
     serializer_class = DisciplinasSerializer
     permission_classes = [IsAuthenticated]
     filter_backends = [DjangoFilterBackend, SearchFilter]
-    search_fields = ['nome']
+    search_fields = ['id', 'nome', 'sigla', 'carga_horaria', 'curso']
+         
+
+        
 
 class DisciplinaFilter(django_filters.FilterSet):
+    id = django_filters
     sigla = django_filters.CharFilter(lookup_expr='icontains')
     nome = django_filters.CharFilter(lookup_expr='icontains')
     curso = django_filters.NumberFilter()
