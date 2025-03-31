@@ -45,7 +45,7 @@ class CursosSearchView(ListAPIView):
     serializer_class = CursosSerializer
     permission_classes = [IsAuthenticated]
     filter_backends = [DjangoFilterBackend, SearchFilter]
-    search_fields = ['nome']
+    search_fields = ['sigla', 'nome', 'tipo_curso', 'minu_aula']
 
 
 # class CursosFilter(django_filters.FilterSet):
