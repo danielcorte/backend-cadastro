@@ -9,7 +9,8 @@ from rest_framework.permissions import IsAuthenticated
 
 from rest_framework.filters import SearchFilter
 from django_filters.rest_framework import DjangoFilterBackend
-import django_filters
+# import django_filters
+
 
 @api_view(['GET', 'POST'])
 def listar_cursos(request):
@@ -33,6 +34,7 @@ class CursosView(ListCreateAPIView):
     serializer_class = CursosSerializer
     permission_classes = [IsAuthenticated]
 
+
 class CursosDetailView(RetrieveUpdateDestroyAPIView):
     queryset = Cursos.objects.all()
     serializer_class = CursosSerializer
@@ -45,21 +47,22 @@ class CursosSearchView(ListAPIView):
     filter_backends = [DjangoFilterBackend, SearchFilter]
     search_fields = ['nome']
 
-class CursosFilter(django_filters.FilterSet):
-    sigla = django_filters.CharFilter(lookup_expr='icontains')
-    nome = django_filters.CharFilter(lookup_expr='icontains')
-    curso = django_filters.NumberFilter()
-    semestre = django_filters.NumberFilter(lookup_expr='icontains')
-    smtr__gt = django_filters.NumberFilter(field_name='semestre', lookup_expr='gt')
-    smtr__lt = django_filters.NumberFilter(field_name='semestre', lookup_expr='lt')
-    carga_horaria = django_filters.NumberFilter(lookup_expr='icontains')
-    ch__gt = django_filters.NumberFilter(field_name='carga_horaria', lookup_expr='gt')
-    ch__lt = django_filters.NumberFilter(field_name='carga_horaria', lookup_expr='lt')
 
-    class Meta:
-        model = Cursos
-        fields = ['sigla', 'nome', 'semestre', 'carga_horaria', 'curso']
+# class CursosFilter(django_filters.FilterSet):
+#     sigla = django_filters.CharFilter(lookup_expr='icontains')
+#     nome = django_filters.CharFilter(lookup_expr='icontains')
+#     curso = django_filters.NumberFilter()
+#     semestre = django_filters.NumberFilter(lookup_expr='icontains')
+#     smtr__gt = django_filters.NumberFilter(field_name='semestre', lookup_expr='gt')
+#     smtr__lt = django_filters.NumberFilter(field_name='semestre', lookup_expr='lt')
+#     carga_horaria = django_filters.NumberFilter(lookup_expr='icontains')
+#     ch__gt = django_filters.NumberFilter(field_name='carga_horaria', lookup_expr='gt')
+#     ch__lt = django_filters.NumberFilter(field_name='carga_horaria', lookup_expr='lt')
 
-def product_list(request):
-    f = CursosFilter(request.GET, queryset=Cursos.objects.all)
-    return render(request, 'teachers_list.html', {'filter': f})
+#     class Meta:
+#         model = Cursos
+#         fields = ['sigla', 'nome', 'semestre', 'carga_horaria', 'curso']
+
+# def product_list(request):
+#     f = CursosFilter(request.GET, queryset=Cursos.objects.all)
+#     return render(request, 'teachers_list.html', {'filter': f})

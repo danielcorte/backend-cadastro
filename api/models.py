@@ -30,7 +30,7 @@ class Cursos(models.Model):
         max_length=10, choices=CURSO_CHOICES,
         default='ct'
     )
-    minu_aula = models.IntegerField(validators=[MaxValueValidator(60)])
+    minu_aula = models.IntegerField()
 
     def __str__(self):
         return f'{self.nome} - {self.sigla}'
