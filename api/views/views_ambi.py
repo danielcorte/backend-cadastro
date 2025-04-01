@@ -43,7 +43,9 @@ class AmbientesSearchView(ListAPIView):
     serializer_class = AmbientesSerializer
     permission_classes = [IsAuthenticated]
     filter_backends = [DjangoFilterBackend, SearchFilter]
-    search_fields = ['nome']
+    search_fields = ['sala', 'prof_resp', 'capacidade', 'lin_atend', 
+                     'curso', 'materia', 'inicio', 'fim', 'periodo',
+                     ]
 
 class AmbientesFilter(django_filters.FilterSet):
     sigla = django_filters.CharFilter(lookup_expr='icontains')
