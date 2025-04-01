@@ -1,6 +1,7 @@
 from django.urls import path
 
-from .views import views_prof, views_disc, views_ambi, views_curs, views_turm
+from .views import views_prof, views_disc, views_ambi, views_curs, views_turm, views_regs
+from django.views.decorators.csrf import csrf_exempt
 
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -37,4 +38,6 @@ urlpatterns = [
     path('turm', views_turm.TurmasView.as_view()),
     path('turm/id/<int:pk>', views_turm.TurmasDetailView.as_view()),
     path('turm/search/', views_turm.TurmasSearchView.as_view()),
+
+    path('cadastro', csrf_exempt(views_regs.CreateUserView.as_view())),
 ]
